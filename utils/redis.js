@@ -9,6 +9,7 @@ class RedisClient {
             console.error(error);
         });
     }
+    
     isAlive() {
         return this.client.connected;
     }

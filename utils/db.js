@@ -1,9 +1,10 @@
 import { MongoClient } from 'mongodb';
 import Collection from 'mongodb/lib/collection';
-
+import envLoader from './env_loader';
 
 class DBClient {
     constructor() {
+        envLoader();
 
         const host = process.env.DB_HOST || 'localhost';
         const port = process.env.DB_PORT || 27017;
@@ -26,6 +27,7 @@ class DBClient {
         const res = await this.client.db.Collection('files').countDocuments();
         return res;
     }
+
 }
 
 const dbClient = new DBClient();

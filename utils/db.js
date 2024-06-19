@@ -12,7 +12,12 @@ class DBClient {
         const dbURL = `mongodb://${host}:${port}/${database}`;
     
         this.client = new MongoClient(dbURL, { useUnifiedTopology: true });
-        this.client.connect();
+        this.client.connect().then(() => {
+            console.log('Connected to database');
+        }).catch((err) => {
+            console.error('Database connection failed', err);
+        });
+    
       }    
 
     isAlive() {
@@ -23,11 +28,11 @@ class DBClient {
 
         
     async nbUsers() {
-       return this.client.db('files_manager').collection('users').countDocuments();
+       return await this.client.db().collection('users').countDocuments();
     }
 
     async nbFiles() {
-       return this.client.db('files_manager').collection('files').countDocuments();  
+       return await this.client.db().collection('files').countDocuments();  
     }
 
 }

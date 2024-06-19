@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
-import Collection from 'mongodb/lib/collection';
-// import envLoader from './env_loader';
+// import Collection from 'mongodb/lib/collection';
+import envLoader from './env_loader';
 
 class DBClient {
     constructor() {
-        // envLoader();
+        envLoader();
 
         const host = process.env.DB_HOST || 'localhost';
         const port = process.env.DB_PORT || 27017;
@@ -21,8 +21,8 @@ class DBClient {
       }    
 
     isAlive() {
-        return this.client._ending === false;
-        // return this.client.connected;
+        // return this.client._ending === false;
+        return this.client.isConnected();
 
     }
 

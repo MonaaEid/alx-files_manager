@@ -1,7 +1,7 @@
 import redisClient from '../utils/redis';
 import dbClient from '../utils/db';
 import sha1 from 'sha1';
-import Queue from 'bull/lib/queue';
+import Queue from '../libs/Queue';
 
 class UsersController {
 	static async postNew(req, res) {

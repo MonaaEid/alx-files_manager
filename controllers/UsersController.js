@@ -3,6 +3,8 @@ import dbClient from '../utils/db';
 import sha1 from 'sha1';
 import Queue from '../libs/Queue';
 
+const userQ = new Queue('email sending');
+
 class UsersController {
 	static async postNew(req, res) {
 		const email = req.body ? req.body.email : null;
@@ -26,7 +28,7 @@ class UsersController {
       .insertOne({ email, password: sha1(password) });
     const userId = insertionInfo.insertedId.toString();
 
-    Queue.add({ userId });
+    userQ.add({ userId });
     res.status(201).json({ email, id: userId });
 	}
 

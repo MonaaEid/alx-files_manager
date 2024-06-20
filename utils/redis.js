@@ -1,11 +1,11 @@
-import redis from 'redis';
-import promisify from 'util';
+import { redis } from 'redis';
+import { promisify } from 'util';
 
 class RedisClient {
   constructor() {
     this.client = redis.createClient();
     this.client.on('error', (error) => {
-      console.log(error);
+      console.error(error);
     });
   }
 
